@@ -1,0 +1,17 @@
+首先感谢您体验由非盈利性学生组织「江南游戏开发社」(JiangNanGame) 自主研发的PvZ同人游戏「植物大战僵尸：旅行」。能够得到您的试玩是我们的荣幸！
+
+在正式开始游戏前，我们希望您能够认真阅读我们的《江南游戏许可及服务协议》（下简称《用户协议》）（http://www.jiangnangame.com/contract.pdf）并严格按照其中的要求执行。我们对于一切违反《用户协议》的行为，均保留追责权利。
+
+我们已于2022年8月发布了「植物大战僵尸：旅行」的配套开源作品「The Open Version Of PvZ Travel」。如果您想了解本游戏计算机程序的工作原理，或希望进行二次开发，您可前往我们的GitHub仓库（https://github.com/jiangnangame/The-Open-Source-Version-Of-PvZ-Travel）进行了解。
+
+如您碰到任何问题，欢迎加入我们的官方玩家QQ群（群号541293504），或Discord平台（https://discord.gg/JdwEwDbCWV），进行交流反馈。
+
+最后再次感谢您对我们的支持！
+
+您可以用Chrome浏览器来获得最佳体验！
+
+点击Click Here To Play.html即可开始游戏
+
+如果感觉到卡顿，请点开 pvztr 文件夹里的文件名为 index 或 index.html 文件进行游戏
+
+（虽然这个也是html，不过资源都从本地加载，不会浪费你的网络流量）

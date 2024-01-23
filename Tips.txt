@@ -1,0 +1,2 @@
+如果你想要一个更流畅的体验，而不是更大的屏幕，你可以点击打开pvztr文件夹里的index.html文件来玩
+If you want a smoother experience instead of a larger screen, you can click to open the index.html file in the pvztr folder to play

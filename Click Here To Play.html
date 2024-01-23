@@ -1,0 +1,195 @@
+<html id="htmlDom" style="overflow: hidden;">
+    <head>
+        <title>植物大战僵尸：旅行</title>
+        <meta charset="utf-8"/>
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no,viewport-fit= cover" />
+		<style>
+			.textDiv{
+				cursor:pointer;position:relative;margin:5px;margin-top:10px;width:fit-content;height:fit-content; font-size:0.8em;padding: 0.4em; background-color:black;border-radius: 500px;opacity:0.3;transition:opacity 0.5s;
+			}
+			#htmlDom{
+				background-repeat: no-repeat;
+				background-size: cover;
+				background-color: #000000;
+			}
+			.spring{
+				background-image: url(imgs/bg.webp);
+			}
+		</style>
+        <link rel="shortcut icon" href="imgs/icon.webp">
+    </head>
+	<div id="mainBox" style="position:absolute;top:0;left:0;height:100%;width:100%;">
+		<div id="extraDiv" style="position: absolute;top:0;left:0;height:100%;width:20%;transition: left 0.2s;">
+			<div class="textDiv" onmouseenter="this.style.opacity=1;" onmouseleave="this.style.opacity=0.3">
+				<a id="oled" style="user-select:none;color:white" >关闭背景</a>
+			</div>
+            <div class="textDiv" onmouseenter="this.style.opacity=1;" onmouseleave="this.style.opacity=0.3">
+				<a id="fullScreen" style="user-select:none;color:white" >全屏游戏</a>
+			</div>
+		</div>
+		<div id="theframe" style="position:absolute;top:0;left:0;width:100%">
+			<iframe id="fam" src="./pvztr/index.html" style="position:absolute;left:1.3em;border:0;border-radius: 5px;" height="600" width="1067"></iframe>
+		</div>
+	</div>
+    <script>
+        if(!/Android|iPhone|iPad/.test(navigator.userAgent)){
+            if(navigator.deviceMemory&&(navigator.deviceMemory<4||navigator.hardwareConcurrency<6)){
+                location.href="./pvztr/index.html";
+            }
+        }
+        let lang={
+            "sev":["进入稳定服","进入测试服"],
+            "JumpServer":'确定要跳转嘛？这将会重启游戏！',
+            "oled":"关闭背景",
+            "fullScreen":"全屏游戏",
+        };
+        let english = navigator.language.substring(0,2)!=="zh";
+        if(english){
+            document.querySelector("title").innerText="PvZ Travel";
+            lang={
+                "JumpServer":'Are you sure? This will restart the game!',
+                "sev":["Stable Server","Test Server"],
+                "oled":"Close Background",
+                "fullScreen":"FullScreen"
+            };
+        }
+		document.getElementById("mainBox").style.width = (window.outerWidth-20)+"px";
+		document.getElementById("mainBox").style.left = "20px";
+		
+		let stype = 0,focusT = 0,fam = document.getElementById("fam");
+        document.getElementById("oled").innerText=lang["oled"];
+		document.getElementById("oled").onclick=function(){
+			if(focusT==0){
+                if(confirm(english?"Double click background to open background":'双击黑屏即可打开背景')){
+                    getColor(0);
+                    focusT=1;
+                }
+            };
+		};
+        document.getElementById("fullScreen").innerText=lang["fullScreen"];
+        document.getElementById("fullScreen").onclick=function(){
+            let dom = document.getElementById("theframe");
+            let open = true;
+            if(document.fullScreenElement||document.webkitFullscreenElement){
+                if((document.fullScreenElement||document.webkitFullscreenElement)==dom){
+                    open = false;
+                }
+                if(document.exitFullScreen){
+                    document.exitFullScreen();
+                    screen.orientation.unlock();
+                }
+                if(document.webkitExitFullscreen){
+                    document.webkitExitFullscreen();
+                    screen.orientation.unlock();
+                }
+            }
+            //console.log(dom,dom.requestFullscreen,open);
+            if(open){
+                if(dom.requestFullscreen){
+                    let res = dom.requestFullscreen({
+                        navigationUI:"hide"
+                    });
+                    screen.orientation.lock("landscape");
+                }
+                if(dom.webkitRequestFullscreen){
+                    let res = dom.webkitRequestFullscreen({
+                        navigationUI:"hide"
+                    });
+                    screen.orientation.lock("landscape");
+                }
+            }
+		};
+		window.onresize = res;
+		function res(){
+            let WinHeight = 600, WinWidth = 1067;
+			let bili = window.innerHeight / WinHeight;
+            let HeightScreen = false;
+			if(window.innerWidth/window.innerHeight<16/9){
+				HeightScreen = true;
+				bili = window.innerWidth / WinWidth;
+			}
+			let fam = document.getElementById("fam");
+			let Tdiv = document.getElementById("theframe");
+			let doms = document.getElementsByClassName("textDiv");
+			fam.style.transform = "scale(" + bili + ")";
+			fam.style.top = "" + (-(WinHeight - WinHeight * bili) / 2) + "px";
+			let posW = (window.innerWidth - WinWidth) / 2;
+			//console.log(window.innerWidth,window.innerHeight,window.innerWidth/window.innerHeight,624/320);
+			document.getElementById("extraDiv").style.left="0";
+            (function(){
+                let div = document.getElementById("extraDiv");
+                div.style.left="";
+                div.onclick=()=>{};
+                div.style.zIndex = "";
+                for(let i = 0;i<doms.length;i++){
+					doms[i].style.display="";
+                    doms[i].style.pointerEvents="";
+                    console.log(233);
+				}
+            })();
+            if(!HeightScreen){
+                if(18/9<=window.innerWidth/window.innerHeight){
+                    
+                }else if(16/9<=window.innerWidth/window.innerHeight){
+                    //console.log("qaq");
+                    posW = (window.innerWidth - (WinWidth+50)) / 2;
+                    let div = document.getElementById("extraDiv");
+                    div.style.left="-10%";
+                    console.log(div.childNodes);
+                    div.onclick=(e)=>{
+                        if(Number.parseInt(div.style.left)!="0"){
+                            div.style.left = "0";
+                            div.style.zIndex = "300";
+                            for(let i = 0;i<doms.length;i++){
+                                doms[i].style.pointerEvents="";
+                            }
+                        }else{
+                            div.style.left = "-10%";
+                            div.style.zIndex = "";
+                            for(let i = 0;i<doms.length;i++){
+                                doms[i].style.pointerEvents="none";
+                            }
+                        }
+                    };
+                    
+                    for(let i = 0;i<doms.length;i++){
+                        doms[i].style.pointerEvents="none";
+                    }
+                }else{
+                    posW = (window.innerWidth - (WinWidth+40)) / 2;
+                    for(let i = 0;i<doms.length;i++){
+                        doms[i].style.display="none";
+                    }
+                }
+                fam.style.left = "" + posW + "px";
+            }else{
+                posW = (window.innerHeight - WinHeight) / 2;
+                                                                //这个-20是因为原来有20px的偏移。
+                fam.style.left = "" + (-(WinWidth - WinWidth * bili) / 2-20) + "px";
+                fam.style.top = "" + posW + "px";
+            }
+			
+		}
+		function getColor(type=1){
+			let mon = new Date().getMonth()+1;
+			let html = document.getElementById("htmlDom");
+			let textButton = document.getElementById("extraDiv");
+			if(type==0){
+				html.className = "";
+				textButton.style.display="none";
+				setTimeout(function(){
+					html.ondblclick=function(){
+						getColor();
+						focusT=0;
+						html.ondblclick = null;
+					}
+				},3000);
+				return;
+			}
+			textButton.style.display="";
+			html.className="spring";
+		}
+		getColor();
+		res();
+    </script>
+</html>

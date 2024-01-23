@@ -1,0 +1,13 @@
+all files with Bgm
+all files with Fuben
+SeasonEXTRA folder
+logo
+writer1, 2 and 3
+Boss
+Time_Is_Money
+MIRROR_LIED
+Industry_Story
+Industry_Story_Front
+moonlight
+
+NOTE: Bgm with Noise at the end is Audio
